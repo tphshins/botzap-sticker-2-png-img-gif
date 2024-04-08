@@ -3,15 +3,21 @@ import pywhatkit as kit
 def handle_message(message):
     # Verifica se a mensagem contém o comando '/toimg'
     if "/toimg" in message:
-        # Usa a biblioteca pywhatkit para converter o sticker em imagem PNG
-        kit.sticker_to_png(r'caminho_para_o_sticker', r'caminho_para_salvar_imagem.png')
-        return "Aqui está a imagem PNG do sticker."
+        try:
+            # Usa a biblioteca pywhatkit para converter o sticker em imagem PNG
+            kit.sticker_to_png(r'caminho_para_o_sticker', r'caminho_para_salvar_imagem.png')
+            return "Aqui está a imagem PNG do sticker."
+        except Exception as e:
+            return f"Erro ao converter sticker para imagem PNG: {e}"
 
     # Verifica se a mensagem contém o comando '/togif'
     elif "/togif" in message:
-        # Usa a biblioteca pywhatkit para converter o sticker animado em GIF
-        kit.sticker_to_gif(r'caminho_para_o_sticker', r'caminho_para_salvar_animacao.gif')
-        return "Aqui está o GIF animado do sticker."
+        try:
+            # Usa a biblioteca pywhatkit para converter o sticker animado em GIF
+            kit.sticker_to_gif(r'caminho_para_o_sticker', r'caminho_para_salvar_animacao.gif')
+            return "Aqui está o GIF animado do sticker."
+        except Exception as e:
+            return f"Erro ao converter sticker para GIF: {e}"
 
     # Caso nenhum comando seja reconhecido
     else:
