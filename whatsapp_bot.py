@@ -3,19 +3,33 @@ import pywhatkit as kit
 def handle_message(message):
     # Verifica se a mensagem contém o comando '/toimg'
     if "/toimg" in message:
-        # Usa a biblioteca pywhatkit para converter o sticker em imagem PNG
-        kit.sticker_to_png(r'caminho_para_o_sticker', r'caminho_para_salvar_imagem.png')
-        return "Aqui está a imagem PNG do sticker."
+        try:
+            # Obtém o índice do comando na mensagem
+            index = message.index("/toimg")
+            # Extrai o caminho do sticker após o comando '/toimg'
+            caminho_sticker = message[index + len("/toimg"):].strip()
+            # Converte o sticker em imagem PNG
+            kit.sticker_to_png(caminho_sticker, 'imagem_converted.png')
+            return "Aqui está a imagem PNG do sticker."
+        except ValueError:
+            return "Formato de comando '/toimg' inválido."
 
     # Verifica se a mensagem contém o comando '/togif'
     elif "/togif" in message:
-        # Usa a biblioteca pywhatkit para converter o sticker animado em GIF
-        kit.sticker_to_gif(r'caminho_para_o_sticker', r'caminho_para_salvar_animacao.gif')
-        return "Aqui está o GIF animado do sticker."
+        try:
+            # Obtém o índice do comando na mensagem
+            index = message.index("/togif")
+            # Extrai o caminho do sticker após o comando '/togif'
+            caminho_sticker = message[index + len("/togif"):].strip()
+            # Converte o sticker animado em GIF
+            kit.sticker_to_gif(caminho_sticker, 'animacao_converted.gif')
+            return "Aqui está o GIF animado do sticker."
+        except ValueError:
+            return "Formato de comando '/togif' inválido."
 
     # Caso nenhum comando seja reconhecido
     else:
-        return "Comando inválido. Use '/toimg' para converter sticker em PNG ou '/togif' para GIF."
+        return "Comando inválido. Use '/toimg caminho_do_sticker' para converter sticker em PNG ou '/togif caminho_do_sticker' para GIF."
 
 # Exemplo de uso
 mensagem_do_usuario = input("Digite sua mensagem: ")
